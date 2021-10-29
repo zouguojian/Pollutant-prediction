@@ -48,7 +48,7 @@ class Dcoderlstm(object):
         h_tld  = tf.layers.dense(tf.concat([h_t, c_t], axis=1),units=c_t.shape[-1],activation=tf.nn.relu) #[batch, h]
         return h_tld
 
-    def decoding(self,encoder_hs):
+    def decoding(self,encoder_hs, emb):
         '''
         :param h_state:
         :return:
@@ -58,7 +58,7 @@ class Dcoderlstm(object):
         h_state=encoder_hs[:,-1,:]
         for i in range(self.predict_time):
             h_state = tf.expand_dims(input=h_state,axis=1)
-
+            h_state = tf.add(h_state, emb[:,i:i+1,:])
             with tf.variable_scope('decoder_lstm', reuse=tf.AUTO_REUSE):
                 h_state, state = tf.nn.dynamic_rnn(cell=self.mlstm_cell, inputs=h_state,initial_state=initial_state,dtype=tf.float32)
                 h_state=self.attention(h_t=h_state,encoder_hs=encoder_hs) # attention

@@ -6,6 +6,7 @@ from spatial_temporal_model.hyparameter import parameter
 from spatial_temporal_model.encoder import cnn_lstm
 from model.decoder import Dcoderlstm
 from model.utils import construct_feed_dict
+from model.encoder import Encoderlstm
 
 import pandas as pd
 import tensorflow as tf
@@ -21,18 +22,96 @@ tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 logs_path="board"
 
+def embedding(inputs,
+              vocab_size,
+              num_units,
+              zero_pad=False,
+              scale=True,
+              scope="embedding",
+              reuse=None):
+    '''Embeds a given tensor.
+    Args:
+      inputs: A `Tensor` with type `int32` or `int64` containing the ids
+         to be looked up in `lookup table`.
+      vocab_size: An int. Vocabulary size.
+      num_units: An int. Number of embedding hidden units.
+      zero_pad: A boolean. If True, all the values of the fist row (id 0)
+        should be constant zeros.
+      scale: A boolean. If True. the outputs is multiplied by sqrt num_units.
+      scope: Optional scope for `variable_scope`.
+      reuse: Boolean, whether to reuse the weights of a previous layer
+        by the same name.
+    Returns:
+      A `Tensor` with one more rank than inputs's. The last dimensionality
+        should be `num_units`.
+
+    For example,
+
+    ```
+    import tensorflow as tf
+
+    inputs = tf.to_int32(tf.reshape(tf.range(2*3), (2, 3)))
+    outputs = embedding(inputs, 6, 2, zero_pad=True)
+    with tf.Session() as sess:
+        sess.run(tf.global_variables_initializer())
+        print sess.run(outputs)
+    >>
+    [[[ 0.          0.        ]
+      [ 0.09754146  0.67385566]
+      [ 0.37864095 -0.35689294]]
+     [[-1.01329422 -1.09939694]
+      [ 0.7521342   0.38203377]
+      [-0.04973143 -0.06210355]]]
+    ```
+
+    ```
+    import tensorflow as tf
+
+    inputs = tf.to_int32(tf.reshape(tf.range(2*3), (2, 3)))
+    outputs = embedding(inputs, 6, 2, zero_pad=False)
+    with tf.Session() as sess:
+        sess.run(tf.global_variables_initializer())
+        print sess.run(outputs)
+    >>
+    [[[-0.19172323 -0.39159766]
+      [-0.43212751 -0.66207761]
+      [ 1.03452027 -0.26704335]]
+     [[-0.11634696 -0.35983452]
+      [ 0.50208133  0.53509563]
+      [ 1.22204471 -0.96587461]]]
+    ```
+    '''
+    with tf.variable_scope(scope, reuse=reuse):
+        lookup_table = tf.get_variable('lookup_table',
+                                       dtype=tf.float32,
+                                       shape=[vocab_size, num_units],
+                                       initializer=tf.truncated_normal_initializer(mean=0, stddev=1, seed=0))
+        if zero_pad:
+            lookup_table = tf.concat((tf.zeros(shape=[1, num_units]),
+                                      lookup_table[1:, :]), 0)
+        outputs = tf.nn.embedding_lookup(lookup_table, inputs)
+
+        if scale:
+            outputs = outputs * (num_units ** 0.5)
+
+    return outputs
+
 class Model(object):
     def __init__(self,para):
         self.para=para
-        self.pollutant_id={'AQI':3, 'PM2.5':4,'PM10':5, 'SO2':6, 'NO2':7, 'O3':8, 'CO':9}
+        self.pollutant_id={'AQI':0, 'PM2.5':1,'PM10':3, 'SO2':5, 'NO2':7, 'O3':9, 'CO':13}
 
         # define placeholders
         self.placeholders = {
             # None : batch _size * time _size
-            'features': tf.placeholder(tf.float32, shape=[None, self.para.input_length,self.para.site_num, self.para.features]),
+            'month': tf.placeholder(tf.int32, shape=(None, self.para.input_length+self.para.output_length), name='input_month'),
+            'day': tf.placeholder(tf.int32, shape=(None, self.para.input_length+self.para.output_length), name='input_day'),
+            'hour': tf.placeholder(tf.int32, shape=(None, self.para.input_length+self.para.output_length), name='input_hour'),
+            'features1': tf.placeholder(tf.float32, shape=[None, self.para.input_length, self.para.site_num, self.para.features1],name='input_1'),
+            'features2': tf.placeholder(tf.float32, shape=[None, self.para.input_length, self.para.features2], name='input_2'),
             'labels': tf.placeholder(tf.float32, shape=[None, self.para.output_length]),
             'dropout': tf.placeholder_with_default(0., shape=()),
-            'is_training': tf.placeholder(tf.bool, shape=()),
+            'is_training': tf.placeholder(tf.bool, shape=(),name='input_is_training'),
         }
         self.model()
 
@@ -47,12 +126,20 @@ class Model(object):
         :return:
         '''
 
-        '''
-        feedforward and BN layer
-        output shape:[batch, time_size,field_size,new_features]
-        '''
-        # normal=normalization.Normalization(inputs=self.placeholders['features'],out_size=self.para.features,is_training=self.para.is_training)
-        # normal.normal()
+        with tf.variable_scope('month'):
+            self.m_emb = embedding(self.placeholders['month'], vocab_size=13, num_units=self.para.hidden_size,
+                                    scale=False, scope="month_embed")
+            print('d_emd shape is : ', self.m_emb.shape)
+
+        with tf.variable_scope('day'):
+            self.d_emb = embedding(self.placeholders['day'], vocab_size=32, num_units=self.para.hidden_size,
+                                    scale=False, scope="day_embed")
+            print('d_emd shape is : ', self.d_emb.shape)
+
+        with tf.variable_scope('hour'):
+            self.h_emb = embedding(self.placeholders['hour'], vocab_size=24, num_units=self.para.hidden_size,
+                                    scale=False, scope="hour_embed")
+            print('h_emd shape is : ', self.h_emb.shape)
 
         # create model
 
@@ -63,6 +150,11 @@ class Model(object):
         axis=1: input data time size
         axis=2: output feature size
         '''
+
+        # shape is [batch, input length, embedding size]
+        emb=tf.add_n([self.m_emb,self.d_emb,self.h_emb])
+
+        # cnn时空特征提取
         l = cnn_lstm(batch_size=self.para.batch_size,
                      layer_num=self.para.hidden_layer,
                      nodes=self.para.hidden_size,
@@ -71,19 +163,23 @@ class Model(object):
                      placeholders=self.placeholders)
 
         # [batch, time ,hidden size]
-        (h_states, c_states) = l.encoding(self.placeholders['features'])
+        (h_states1, c_states1) = l.encoding(self.placeholders['features1'], emb[:,:self.para.input_length,:])
+        print('h_states1 shape is : ', h_states1.shape)
 
-        print('h_states shape is : ', h_states.shape)
+        # lstm 时序特征提取
+        encoder_init =Encoderlstm(self.para.batch_size,
+                                    self.para.hidden_layer,
+                                    self.para.hidden_size,
+                                    placeholders=self.placeholders)
 
-        # encoder_init=encoder_lstm.lstm(self.para.batch_size,
-        #                                self.para.hidden_layer,
-        #                                self.para.hidden_size,
-        #                                self.para.is_training)
-        # encoder_init=encodet_gru.gru(self.x_input,batch_size,encoder_layer,encoder_nodes,is_training)
-        # encoder_init=encoder_rnn.rnn(self.x_input,batch_size,encoder_layer,encoder_nodes,is_training)
-        # (h_states,c_states)=encoder_init.encoding()
+        ## [batch, time , hidden size]
+        (h_states2, c_states2) = encoder_init.encoding(self.placeholders['features2'], emb[:,:self.para.input_length,:])
 
-        # this step to presict the polutant concentration
+        print('h_states2 shape is : ', h_states2.shape)
+
+        h_states=tf.layers.dense(tf.concat([h_states1,h_states2],axis=-1),units=self.para.hidden_size, activation=tf.nn.relu, name='layers')
+
+        # this step to predict the pollutant concentration
         '''
         decoder, return --- for example ,output shape is :(32, 162, 1)
         axis=0: bath size
@@ -96,7 +192,7 @@ class Model(object):
                                     self.para.hidden_size,
                                     placeholders=self.placeholders)
 
-        self.pres = decoder_init.decoding(h_states)
+        self.pres = decoder_init.decoding(h_states, emb[:,self.para.input_length: ,:])
         print('pres shape is : ', self.pres.shape)
 
         self.cross_entropy = tf.reduce_mean(
@@ -185,7 +281,7 @@ class Model(object):
         from now on,the model begin to training, until the epoch to 100
         '''
 
-        max_rmse = 100
+        max_mae = 100
         self.sess.run(tf.global_variables_initializer())
         merged = tf.summary.merge_all()
         writer = tf.summary.FileWriter(logs_path,graph=tf.get_default_graph())
@@ -202,31 +298,27 @@ class Model(object):
 
         next_elements=self.iterate.next_batch(batch_size=self.para.batch_size, epochs=self.para.epochs,is_training=True)
 
-        for i in range(int((self.iterate.train_data.shape[0]//self.para.site_num - (self.para.input_length + self.para.output_length))//self.para.step)
+        for i in range(int((self.iterate.train_p.shape[0] - (self.para.input_length + self.para.output_length))//self.para.step)
                     // self.para.batch_size * self.para.epochs):
 
-            x, label =self.sess.run(next_elements)
-            features = np.reshape(np.array(x), [-1, self.para.input_length, self.para.site_num, self.para.features])
-            feed_dict = construct_feed_dict(features, label, self.placeholders)
+            x1, x2, m, d, h, label =self.sess.run(next_elements)
+            features1 = np.reshape(np.array(x1), [-1, self.para.input_length, self.para.site_num, self.para.features1])
+            features2 = np.reshape(np.array(x2), [-1, self.para.input_length, self.para.features2])
+            feed_dict = construct_feed_dict(features1, features2, m, d, h, label, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.para.dropout})
-            feed_dict.update({self.placeholders['is_training']: True})
+            feed_dict.update({self.placeholders['is_training']: self.para.is_training})
 
             summary, loss, _ = self.sess.run((merged,self.cross_entropy,self.train_op), feed_dict=feed_dict)
             print("after %d steps,the training average loss value is : %.6f" % (i, loss))
             # writer.add_summary(summary, loss)
 
-            # if max_rmse > rmse_error:
-            #     print("the validate average rmse loss value is : %.6f" % (rmse_error))
-            #     max_rmse = rmse_error
-            #     self.saver.save(self.sess, save_path=self.para.save_path + 'model.ckpt')
-
             # validate processing
             if i % 50 == 0:
-                rmse_error=self.evaluate()
+                mae_error=self.evaluate()
 
-                if max_rmse>rmse_error:
-                    print("the validate average rmse loss value is : %.6f" % (rmse_error))
-                    max_rmse=rmse_error
+                if max_mae>mae_error:
+                    print("the validate average mae loss value is : %.6f" % (mae_error))
+                    max_mae=mae_error
                     self.saver.save(self.sess,save_path=self.para.save_path+'model.ckpt')
 
     def evaluate(self):
@@ -254,16 +346,17 @@ class Model(object):
                                                     normalize=self.para.normalize)
 
         next_ = self.iterate_test.next_batch(batch_size=self.para.batch_size, epochs=1,is_training=False)
-        max,min=self.iterate_test.max_list[self.pollutant_id[self.para.pollutant_id]],self.iterate_test.min_list[self.pollutant_id[self.para.pollutant_id]]
+        max,min=self.iterate_test.max_p[self.pollutant_id[self.para.pollutant_id]],self.iterate_test.min_p[self.pollutant_id[self.para.pollutant_id]]
 
-        for i in range(int((self.iterate_test.test_data.shape[0]//self.para.site_num -(self.para.input_length+ self.para.output_length))//self.para.output_length)
+        for i in range(int((self.iterate_test.test_p.shape[0] -(self.para.input_length+ self.para.output_length))//self.para.output_length)
                        // self.para.batch_size):
-            x, label =self.sess.run(next_)
+            x1, x2, m, d, h, label =self.sess.run(next_)
+            features1 = np.reshape(np.array(x1), [-1, self.para.input_length, self.para.site_num, self.para.features1])
+            features2 = np.reshape(np.array(x2), [-1, self.para.input_length, self.para.features2])
 
-            features = np.reshape(np.array(x), [-1, self.para.input_length, self.para.site_num, self.para.features])
-            feed_dict = construct_feed_dict(features, label, self.placeholders)
+            feed_dict = construct_feed_dict(features1, features2,  m, d, h, label, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-            feed_dict.update({self.placeholders['is_training']: False})
+            feed_dict.update({self.placeholders['is_training']: self.para.is_training})
 
             pre = self.sess.run((self.pres), feed_dict=feed_dict)
             label_list.append(label)
@@ -279,15 +372,18 @@ class Model(object):
             label_list = np.array([row for row in label_list])
             predict_list = np.array([row for row in predict_list])
 
-        np.savetxt('results/results_label.txt',label_list,'%.3f')
-        np.savetxt('results/results_predict.txt', predict_list, '%.3f')
+        # np.savetxt('results/results_label.txt',label_list,'%.3f')
+        # np.savetxt('results/results_predict.txt', predict_list, '%.3f')
 
         label_list=np.reshape(label_list,[-1])
         predict_list=np.reshape(predict_list,[-1])
 
+        print(label_list)
+        print(predict_list)
+
         average_error, rmse_error, cor, R2= self.accuracy(label_list, predict_list)  #产生预测指标
         # self.describe(label_list, predict_list, self.para.output_length)   #预测值可视化
-        return rmse_error
+        return average_error
 
 def main(argv=None):
     '''

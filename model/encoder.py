@@ -1,6 +1,7 @@
 # -- coding: utf-8 --
 
 import tensorflow as tf
+
 class Encoderlstm(object):
     def __init__(self,batch_size,layer_num=1,nodes=128,placeholders=None):
         '''
@@ -31,12 +32,14 @@ class Encoderlstm(object):
         self.mlstm_cell = tf.nn.rnn_cell.MultiRNNCell([self.lstm_cell() for _ in range(self.layer_num)], state_is_tuple=True)
         self.initial_state=self.mlstm_cell.zero_state(self.batch_size,tf.float32)
 
-    def encoding(self,inputs=None):
+    def encoding(self,inputs=None, emb=None):
         '''
         :param inputs:
         :return:
         '''
         initial_state=self.initial_state
+        inputs=tf.layers.dense(inputs,units=self.nodes,name='tr')
+        inputs=tf.add(inputs, emb)
         with tf.variable_scope('encoder', reuse=tf.AUTO_REUSE):
             h_states, c_states = tf.nn.dynamic_rnn(cell=self.mlstm_cell, inputs=inputs, initial_state=initial_state,dtype=tf.float32)
         return (h_states,c_states)
