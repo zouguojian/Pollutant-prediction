@@ -63,6 +63,6 @@ class Dcoderlstm(object):
                 h_state, state = tf.nn.dynamic_rnn(cell=self.mlstm_cell, inputs=h_state,initial_state=initial_state,dtype=tf.float32)
                 h_state=self.attention(h_t=h_state,encoder_hs=encoder_hs) # attention
                 initial_state=state
-                results=tf.layers.dense(inputs=h_state,units=1,name='layer',reuse=tf.AUTO_REUSE, activation=tf.nn.relu)
+                results=tf.layers.dense(inputs=h_state,units=1,name='layer',reuse=tf.AUTO_REUSE)
             h.append(results)
         return tf.squeeze(tf.transpose(tf.convert_to_tensor(h),[1,2,0]),axis=1)
