@@ -41,15 +41,23 @@ import pickle
 
 
 
-file = open('/Users/guojianzou/Documents/博士相关论文/Housing prices/data/text.txt', 'rb')
-# print(file)
-# js = file.read()
-# dic = json.loads(js)
-data=file.readline()
-while data:
-    d=eval(data)
-    print(d)
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-    # print(d['pois'])
-    data=file.readline()
-file.close()
+# fmt(字符串格式代码，矩阵上标识数字的数据格式，比如保留小数点后几位数字)
+
+import numpy as np
+
+# plt.figure()
+
+x = np.random.randn(4, 4)
+
+f, (ax1, ax2) = plt.subplots( nrows=2)
+
+sns.heatmap(x, annot=False, ax=ax1)
+
+sns.heatmap(np.random.randn(3, 3), annot=True, fmt='.1f', ax=ax2)
+
+plt.show()
+
+

@@ -1,6 +1,7 @@
 # -- coding: utf-8 --
 
 import tensorflow as tf
+
 from spatial_temporal_attention.spatial_attention import AttentionLayer
 
 class s_lstm(object):
@@ -37,34 +38,38 @@ class s_lstm(object):
         :param x: shape is [batch size, input length, features]
         :return: shape is [batch size, features]
         '''
+        x=tf.layers.dense(inputs=x, units=self.nodes, name='s_att',reuse=tf.AUTO_REUSE)
 
-        with tf.variable_scope('s_attention',reuse=tf.AUTO_REUSE):
-            x=tf.layers.dense(inputs=x, units=self.nodes, name='s_att',reuse=tf.AUTO_REUSE)
-
-            x=AttentionLayer(inputs=x,hidden_size=self.nodes)
-        return x
+        x, alpha=AttentionLayer(inputs=x,hidden_size=self.nodes)
+        return x, alpha
 
     def encoding(self, inputs, emb):
         '''
         :param inputs:
-        :return: shape is [batch size, time size, hidden size]
+        :return: shape is [batch size, time size, site num, hidden size]
         '''
-
+        shape = inputs.shape
         # for s_att to extract spatial features
         stt_out=list()
-        for time in range(inputs.shape[1]):
-            stt_out.append(self.s_attention(inputs[:,time,:,:]))
+        inputs=tf.reshape(inputs, [-1, shape[2], shape[3]])
+        # for time in range(inputs.shape[1]):
+        #     stt_out.append(self.s_attention(inputs[:,time,:,:]))
 
-        inputs=tf.transpose(stt_out,[1,0,2])
+        # inputs=tf.transpose(stt_out,[1,0,2])
+        inputs, alpha=self.s_attention(inputs)
+        inputs=tf.reshape(inputs, [-1, shape[1], self.nodes])
+
         inputs =tf.add(inputs,emb)
+
+        # return inputs, 0
 
         print('the stt output series shape is ; ', inputs.shape)
 
         # out put the store data
-        with tf.variable_scope('encoder_cnn_lstm'):
-            self.h_states, self.c_states = tf.nn.dynamic_rnn(cell=self.e_mlstm, inputs=inputs, initial_state=self.initial_state,dtype=tf.float32)
+        with tf.variable_scope('encoder_s_lstm'):
+            h_states, c_states = tf.nn.dynamic_rnn(cell=self.e_mlstm, inputs=inputs, initial_state=self.initial_state,dtype=tf.float32)
 
-        return self.h_states, self.c_states
+        return h_states, c_states, alpha
 
 import numpy as np
 if __name__ == '__main__':

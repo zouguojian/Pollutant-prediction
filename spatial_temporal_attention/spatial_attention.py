@@ -20,4 +20,4 @@ def AttentionLayer(inputs, hidden_size):
         alpha = tf.nn.softmax(tf.reduce_sum(tf.multiply(h, u_context), axis=2, keep_dims=True), dim=1)
         #reduce_sum之前shape为[batch_szie, max_time, hidden_szie*2]，之后shape为[batch_size, hidden_size*2]
         atten_output = tf.reduce_sum(tf.multiply(inputs, alpha), axis=1)
-        return atten_output
+        return atten_output, alpha

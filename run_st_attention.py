@@ -12,6 +12,7 @@ import pandas as pd
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import model.normalization as normalization
 
 import spatial_temporal_attention.process as data_load
@@ -163,7 +164,7 @@ class Model(object):
                      placeholders=self.placeholders)
 
         # [batch, time ,hidden size]
-        (h_states1, c_states1) = l.encoding(self.placeholders['features1'], emb[:,:self.para.input_length,:])
+        (h_states1, c_states1, self.alpha) = l.encoding(self.placeholders['features1'], emb[:,:self.para.input_length,:])
         print('h_states1 shape is : ', h_states1.shape)
 
         # lstm 时序特征提取
@@ -192,7 +193,7 @@ class Model(object):
                                     self.para.hidden_size,
                                     placeholders=self.placeholders)
 
-        self.pres = decoder_init.decoding(h_states, emb[:,self.para.input_length: ,:])
+        self.pres ,self.temporal_att= decoder_init.decoding(h_states, emb[:,self.para.input_length: ,:])
         print('pres shape is : ', self.pres.shape)
 
         self.cross_entropy = tf.reduce_mean(
@@ -269,6 +270,20 @@ class Model(object):
         plt.title("the prediction of pm$_{2.5}", fontsize=17)
         plt.show()
 
+    def seaborn(self, x, x1):
+
+        # plt.figure()
+
+        # x = np.random.randn(4, 4)
+
+        f, (ax1,ax2) = plt.subplots(nrows=2)
+
+        sns.heatmap(x, annot=False, ax=ax1)
+        sns.heatmap(x1, annot=False, ax=ax2)
+
+        plt.show()
+
+
     def initialize_session(self):
         self.sess=tf.Session()
         self.saver=tf.train.Saver(var_list=tf.trainable_variables())
@@ -310,12 +325,11 @@ class Model(object):
 
             summary, loss, _ = self.sess.run((merged,self.cross_entropy,self.train_op), feed_dict=feed_dict)
             print("after %d steps,the training average loss value is : %.6f" % (i, loss))
-            # writer.add_summary(summary, loss)
+            writer.add_summary(summary, loss)
 
             # validate processing
-            if i % 50 == 0:
+            if i % 10 == 0:
                 mae_error=self.evaluate()
-
                 if max_mae>mae_error:
                     print("the validate average mae loss value is : %.6f" % (mae_error))
                     max_mae=mae_error
@@ -347,6 +361,7 @@ class Model(object):
 
         next_ = self.iterate_test.next_batch(batch_size=self.para.batch_size, epochs=1,is_training=False)
         max,min=self.iterate_test.max_p[self.pollutant_id[self.para.pollutant_id]],self.iterate_test.min_p[self.pollutant_id[self.para.pollutant_id]]
+        print(max, min)
 
         for i in range(int((self.iterate_test.test_p.shape[0] -(self.para.input_length+ self.para.output_length))//self.para.output_length)
                        // self.para.batch_size):
@@ -358,9 +373,19 @@ class Model(object):
             feed_dict.update({self.placeholders['dropout']: 0.0})
             feed_dict.update({self.placeholders['is_training']: self.para.is_training})
 
-            pre = self.sess.run((self.pres), feed_dict=feed_dict)
+            pre,temporal_att,alpha = self.sess.run((self.pres,self.temporal_att, self.alpha), feed_dict=feed_dict)
             label_list.append(label)
             predict_list.append(pre)
+
+            # np.squeeze()
+            print(np.array(temporal_att,dtype=np.float32).shape) # temporal attention show
+            print(alpha.shape) # spatial attention show
+            self.seaborn(x=np.squeeze(np.array(temporal_att,dtype=np.float32)),x1=np.squeeze(alpha)) # temporal attention show
+
+            # print(temporal_att)
+
+            # print(np.array([self.re_current(row,max,min) for row in label]))
+            # print(np.array([self.re_current(row,max,min) for row in pre]))
 
         label_list=np.reshape(np.array(label_list,dtype=np.float32),[-1, self.para.output_length])
         predict_list=np.reshape(np.array(predict_list,dtype=np.float32),[-1, self.para.output_length])
@@ -377,9 +402,6 @@ class Model(object):
 
         label_list=np.reshape(label_list,[-1])
         predict_list=np.reshape(predict_list,[-1])
-
-        print(label_list)
-        print(predict_list)
 
         average_error, rmse_error, cor, R2= self.accuracy(label_list, predict_list)  #产生预测指标
         # self.describe(label_list, predict_list, self.para.output_length)   #预测值可视化
