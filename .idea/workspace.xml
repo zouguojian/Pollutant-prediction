@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3ef2644-d696-4093-ae0a-4abad8778fd6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/data_process.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/spatial_temporal.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/decoder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/encoder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/hyparameter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/normalization.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/process.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/model/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/run_train.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spatial_temporal_model/encoder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spatial_temporal_model/hyparameter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spatial_temporal_model/process.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,33 +14,34 @@
     <session id="-1151327133">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.closed" value="12" />
+          <entry key="project.open.time.1" value="6" />
+          <entry key="project.open.time.4" value="5" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.opened" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="LICENSE" value="1" />
-          <entry key="csv" value="31" />
+          <entry key="csv" value="95" />
           <entry key="md" value="1" />
           <entry key="model" value="1" />
-          <entry key="py" value="41" />
+          <entry key="py" value="122" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="35" />
-          <entry key="Python" value="41" />
+          <entry key="PLAIN_TEXT" value="99" />
+          <entry key="Python" value="122" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="131" />
-          <entry key="py" value="3786" />
+          <entry key="py" value="10154" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
@@ -64,7 +49,7 @@
         <counts>
           <entry key="Markdown" value="131" />
           <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="3786" />
+          <entry key="Python" value="10154" />
         </counts>
       </usages-collector>
     </session>
@@ -72,61 +57,44 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/run_train.py">
+        <entry file="file://$PROJECT_DIR$/run_st_attention.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/train.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1578">
-              <caret line="102" column="54" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="54" />
+            <state relative-caret-position="3945">
+              <caret line="280" column="43" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
               <folding>
                 <element signature="e#23#54#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spatial_temporal_model/encoder.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="927">
-              <caret line="82" column="11" selection-start-line="82" selection-start-column="11" selection-end-line="82" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spatial_temporal_model/hyparameter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="31">
-              <caret line="13" column="64" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spatial_temporal_model/process.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-99">
-              <caret line="55" column="11" lean-forward="true" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
-              <folding>
-                <element signature="e#46#69#0" expanded="true" />
+                <marker date="1638448234580" expanded="true" signature="10504:10728" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/example.py">
+        <entry file="file://$PROJECT_DIR$/spatial_temporal_attention/hyparameter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+            <state relative-caret-position="504">
+              <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spatial_temporal_attention/encoder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1035">
+              <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+              <folding>
+                <element signature="e#23#46#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tttttt.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="55" selection-start-line="55" selection-end-line="58" selection-end-column="65" />
               <folding>
                 <element signature="e#23#42#0" expanded="true" />
               </folding>
@@ -135,10 +103,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/all_test.csv">
+        <entry file="file://$PROJECT_DIR$/model/decoder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2670">
-              <caret line="178" column="45" lean-forward="true" selection-start-line="178" selection-start-column="45" selection-end-line="178" selection-end-column="45" />
+            <state relative-caret-position="555">
+              <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -152,6 +120,26 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>beilun</find>
+      <find>caoejiang</find>
+      <find>caojing</find>
+      <find>changer</find>
+      <find>huasu</find>
+      <find>jiaxing</find>
+      <find>liuhen</find>
+      <find>liuhe</find>
+      <find>liuheng</find>
+      <find>shidongkou</find>
+      <find>waigaoqiao</find>
+      <find>wangting</find>
+      <find>huasu_4</find>
+      <find>699</find>
+      <find>9</find>
+      <find>pollution</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -160,32 +148,43 @@
       <list>
         <option value="$PROJECT_DIR$/data/data_preocess.py" />
         <option value="$PROJECT_DIR$/model/normalization.py" />
-        <option value="$PROJECT_DIR$/model/utils.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/model/t.py" />
         <option value="$PROJECT_DIR$/data/test.csv" />
         <option value="$PROJECT_DIR$/data/train.csv" />
-        <option value="$PROJECT_DIR$/model/decoder.py" />
-        <option value="$PROJECT_DIR$/model/encoder.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/data/data_process.py" />
-        <option value="$PROJECT_DIR$/run_train.py" />
         <option value="$PROJECT_DIR$/run_test.py" />
+        <option value="$PROJECT_DIR$/data/spatial_temporal.py" />
+        <option value="$PROJECT_DIR$/data/conbine.py" />
+        <option value="$PROJECT_DIR$/data/new_data/site.csv" />
+        <option value="$PROJECT_DIR$/data/new_data/process.py" />
+        <option value="$PROJECT_DIR$/data/new_data/pollution_train.csv" />
+        <option value="$PROJECT_DIR$/spatial_temporal_model/hyparameter.py" />
+        <option value="$PROJECT_DIR$/spatial_temporal_model/process.py" />
+        <option value="$PROJECT_DIR$/model/utils.py" />
+        <option value="$PROJECT_DIR$/model/encoder.py" />
+        <option value="$PROJECT_DIR$/example.py" />
+        <option value="$PROJECT_DIR$/data/new_data/pollution.py" />
+        <option value="$PROJECT_DIR$/spatial_temporal_model/encoder.py" />
         <option value="$PROJECT_DIR$/model/process.py" />
         <option value="$PROJECT_DIR$/model/hyparameter.py" />
-        <option value="$PROJECT_DIR$/data/spatial_temporal.py" />
-        <option value="$PROJECT_DIR$/spatial_temporal_model/encoder.py" />
-        <option value="$PROJECT_DIR$/spatial_temporal_model/process.py" />
+        <option value="$PROJECT_DIR$/run_train.py" />
+        <option value="$PROJECT_DIR$/cnn_lstm_attention/spatial_attention.py" />
         <option value="$PROJECT_DIR$/train.py" />
-        <option value="$PROJECT_DIR$/spatial_temporal_model/hyparameter.py" />
-        <option value="$PROJECT_DIR$/example.py" />
+        <option value="$PROJECT_DIR$/model/decoder.py" />
+        <option value="$PROJECT_DIR$/spatial_temporal_attention/encoder.py" />
+        <option value="$PROJECT_DIR$/tttttt.py" />
+        <option value="$PROJECT_DIR$/run_st_attention.py" />
+        <option value="$PROJECT_DIR$/spatial_temporal_attention/spatial_attention.py" />
+        <option value="$PROJECT_DIR$/spatial_temporal_attention/hyparameter.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="21" />
-    <option name="y" value="46" />
-    <option name="width" value="1402" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="66" />
+    <option name="y" value="37" />
+    <option name="width" value="1440" />
     <option name="height" value="796" />
   </component>
   <component name="ProjectView">
@@ -201,21 +200,6 @@
               <item name="pollutant-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="pollutant-prediction" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="pollutant-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pollutant-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pollutant-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pollutant-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pollutant-prediction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pollutant-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="spatial_temporal_model" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -223,6 +207,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/guojianzou/pollutant-prediction/example.py" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -238,28 +223,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.example">
-    <configuration name="encoder" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="pollutant-prediction" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/spatial_temporal_model" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spatial_temporal_model/encoder.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.run_st_attention">
     <configuration name="example" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pollutant-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -281,7 +245,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="run_train" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="pollution" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pollutant-prediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data/new_data" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/new_data/pollution.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="run_st_attention" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pollutant-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -293,28 +278,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_train.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="spatial_temporal" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="pollutant-prediction" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/spatial_temporal.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_st_attention.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -344,20 +308,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tttttt" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pollutant-prediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tttttt.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.example" />
-      <item itemvalue="Python.encoder" />
+      <item itemvalue="Python.pollution" />
       <item itemvalue="Python.train" />
-      <item itemvalue="Python.spatial_temporal" />
-      <item itemvalue="Python.run_train" />
+      <item itemvalue="Python.example" />
+      <item itemvalue="Python.tttttt" />
+      <item itemvalue="Python.run_st_attention" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.run_st_attention" />
+        <item itemvalue="Python.tttttt" />
+        <item itemvalue="Python.pollution" />
         <item itemvalue="Python.example" />
         <item itemvalue="Python.train" />
-        <item itemvalue="Python.run_train" />
-        <item itemvalue="Python.spatial_temporal" />
-        <item itemvalue="Python.encoder" />
       </list>
     </recent_temporary>
   </component>
@@ -375,20 +360,21 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="21" y="46" width="1402" height="796" extended-state="1" />
+    <frame x="0" y="23" width="1440" height="796" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1955105" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29809725" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2215909" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.40767047" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39914772" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.41744548" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -432,48 +418,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/linear-PM25.model">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2821">
-          <caret line="14" column="74" lean-forward="true" selection-start-line="14" selection-start-column="74" selection-end-line="14" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Downloads/linear-PM25.model" />
     <entry file="file://$PROJECT_DIR$/data/train.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="458700">
           <caret line="30580" column="49" lean-forward="true" selection-start-line="30580" selection-start-column="49" selection-end-line="30580" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/decoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" column="35" selection-start-line="64" selection-start-column="30" selection-end-line="64" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="47" column="11" selection-start-line="47" selection-start-column="11" selection-end-line="47" selection-end-column="11" />
-          <folding>
-            <element signature="e#23#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="38" column="40" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -488,126 +437,247 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" lean-forward="true" selection-end-line="92" selection-end-column="54" />
-          <folding>
-            <element signature="e#23#42#0" expanded="true" />
-            <marker date="1631098844684" expanded="true" signature="183:185" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/results/results_predict.txt" />
+    <entry file="file://$PROJECT_DIR$/data/factorymergedata.csv" />
     <entry file="file://$PROJECT_DIR$/data/spatial_temporal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#23#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="135">
+          <caret line="9" column="31" lean-forward="true" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/all_train.csv">
+    <entry file="file://$PROJECT_DIR$/data/new_data/site.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4128162" />
+        <state relative-caret-position="179">
+          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results/results_predict.txt">
+    <entry file="file://$PROJECT_DIR$/data/conbine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-251" />
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/test.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="118" column="47" lean-forward="true" selection-start-line="118" selection-start-column="47" selection-end-line="118" selection-end-column="47" />
+    <entry file="file://$PROJECT_DIR$/data/new_data/pollution_2020.csv" />
+    <entry file="file://$PROJECT_DIR$/data/new_data/pollution_2021.csv" />
+    <entry file="file://$PROJECT_DIR$/data/new_data/pollution_train.csv" />
+    <entry file="file://$PROJECT_DIR$/data/new_data/train.csv" />
+    <entry file="file://$PROJECT_DIR$/data/new_data/fgmergedata.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="95">
+          <caret line="379" column="11" selection-start-line="379" selection-start-column="4" selection-end-line="379" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/test_resource.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="41" selection-start-column="41" selection-end-column="41" />
+        <state relative-caret-position="168330">
+          <caret line="11222" column="44" lean-forward="true" selection-start-line="11222" selection-start-column="44" selection-end-line="11222" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
+    <entry file="file://$PROJECT_DIR$/data/test.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/process.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="36" column="101" selection-start-line="36" selection-start-column="101" selection-end-line="36" selection-end-column="108" />
-          <folding>
-            <element signature="e#46#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="46" column="11" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spatial_temporal_model/encoder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="927">
-          <caret line="82" column="11" selection-start-line="82" selection-start-column="11" selection-end-line="82" selection-end-column="11" />
+        <state relative-caret-position="1455">
+          <caret line="97" column="26" selection-start-line="97" selection-start-column="26" selection-end-line="97" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.conda/envs/prediction/lib/python3.6/site-packages/tensorflow/python/client/session.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
-          <caret line="1151" selection-start-line="1151" selection-end-line="1151" />
+          <caret line="928" selection-start-line="928" selection-end-line="928" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/data/new_data/train_pp.csv" />
+    <entry file="file://$PROJECT_DIR$/model/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="45" selection-start-line="2" selection-start-column="45" selection-end-line="2" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.conda/envs/prediction/lib/python3.6/encodings/ascii.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/new_data/process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="61" column="28" lean-forward="true" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/new_data/pollution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="32" column="77" selection-start-line="32" selection-start-column="77" selection-end-line="32" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cnn_lstm_attention/spatial_attention.py" />
     <entry file="file://$PROJECT_DIR$/spatial_temporal_model/hyparameter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="13" column="64" selection-start-line="13" selection-start-column="64" selection-end-line="13" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1578">
-          <caret line="102" column="54" selection-start-line="102" selection-start-column="50" selection-end-line="102" selection-end-column="54" />
-          <folding>
-            <element signature="e#23#54#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spatial_temporal_model/process.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-99">
-          <caret line="55" column="11" lean-forward="true" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
-          <folding>
-            <element signature="e#46#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/all_test.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2670">
-          <caret line="178" column="45" lean-forward="true" selection-start-line="178" selection-start-column="45" selection-end-line="178" selection-end-column="45" />
+        <state relative-caret-position="390">
+          <caret line="26" column="95" lean-forward="true" selection-start-line="26" selection-start-column="95" selection-end-line="26" selection-end-column="95" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        <state relative-caret-position="855">
+          <caret line="59" column="27" lean-forward="true" selection-start-line="59" selection-start-column="27" selection-end-line="59" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1618">
+          <caret line="50" column="32" lean-forward="true" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/hyparameter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="11" column="71" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="36" column="46" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatial_temporal_model/encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-906">
+          <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.conda/envs/prediction/lib/python3.6/site-packages/tensorflow/python/ops/array_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="1419" selection-start-line="1419" selection-end-line="1419" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/all_train.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/new_data/train_s.csv">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="165">
+          <caret line="11" column="65" lean-forward="true" selection-start-line="11" selection-start-column="65" selection-end-line="11" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/all_test.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="49" lean-forward="true" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" lean-forward="true" selection-end-line="302" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatial_temporal_model/process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="786">
+          <caret line="158" column="26" lean-forward="true" selection-start-line="158" selection-start-column="26" selection-end-line="158" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="380" selection-start-line="380" selection-end-line="381" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/new_data/train_p.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5806">
+          <caret line="9928" column="22" lean-forward="true" selection-start-line="9928" selection-start-column="22" selection-end-line="9928" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatial_temporal_attention/process.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatial_temporal_attention/spatial_attention.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="63" selection-start-line="6" selection-start-column="63" selection-end-line="6" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_st_attention.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3945">
+          <caret line="280" column="43" selection-start-line="280" selection-start-column="43" selection-end-line="280" selection-end-column="43" />
+          <folding>
+            <element signature="e#23#54#0" expanded="true" />
+            <marker date="1638448234580" expanded="true" signature="10504:10728" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatial_temporal_attention/encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="71" column="40" selection-start-line="71" selection-start-column="40" selection-end-line="71" selection-end-column="40" />
+          <folding>
+            <element signature="e#23#46#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tttttt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="55" selection-start-line="55" selection-end-line="58" selection-end-column="65" />
           <folding>
             <element signature="e#23#42#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/decoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatial_temporal_attention/hyparameter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="56" lean-forward="true" selection-start-line="56" selection-end-line="56" />
         </state>
       </provider>
     </entry>

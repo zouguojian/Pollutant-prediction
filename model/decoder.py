@@ -41,28 +41,31 @@ class Dcoderlstm(object):
         '''
         scores = tf.reduce_sum(tf.multiply(encoder_hs, tf.tile(h_t,multiples=[1,encoder_hs.shape[1],1])), 2)
         a_t = tf.nn.softmax(scores)  # [batch, time]
+        a=a_t
         a_t = tf.expand_dims(a_t, 2) # [batch, time, 1]
         c_t = tf.matmul(tf.transpose(encoder_hs, perm=[0,2,1]), a_t) #[batch ,h , 1]
         c_t = tf.squeeze(c_t, axis=2) #[batch, h]]
         h_t=tf.squeeze(h_t,axis=1)
         h_tld  = tf.layers.dense(tf.concat([h_t, c_t], axis=1),units=c_t.shape[-1],activation=tf.nn.relu) #[batch, h]
-        return h_tld
+        return h_tld, a
 
-    def decoding(self,encoder_hs):
+    def decoding(self,encoder_hs, emb):
         '''
         :param h_state:
         :return:
         '''
         h=[]
+        temporal_att=[]
         initial_state=self.initial_state
         h_state=encoder_hs[:,-1,:]
         for i in range(self.predict_time):
             h_state = tf.expand_dims(input=h_state,axis=1)
-
+            h_state = tf.add(h_state, emb[:,i:i+1,:])
             with tf.variable_scope('decoder_lstm', reuse=tf.AUTO_REUSE):
                 h_state, state = tf.nn.dynamic_rnn(cell=self.mlstm_cell, inputs=h_state,initial_state=initial_state,dtype=tf.float32)
-                h_state=self.attention(h_t=h_state,encoder_hs=encoder_hs) # attention
+                h_state,a=self.attention(h_t=h_state,encoder_hs=encoder_hs) # attention
                 initial_state=state
+                temporal_att.append(a)
                 results=tf.layers.dense(inputs=h_state,units=1,name='layer',reuse=tf.AUTO_REUSE, activation=tf.nn.relu)
             h.append(results)
-        return tf.squeeze(tf.transpose(tf.convert_to_tensor(h),[1,2,0]),axis=1)
+        return tf.squeeze(tf.transpose(tf.convert_to_tensor(h),[1,2,0]),axis=1),temporal_att

@@ -11,11 +11,11 @@ import pandas as pd
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
-import model.normalization as normalization
 
 import model.process as data_load
 import os
 import argparse
+import shutil
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
@@ -45,13 +45,6 @@ class Model(object):
         :param is_training: True
         :return:
         '''
-
-        '''
-        feedforward and BN layer
-        output shape:[batch, time_size,field_size,new_features]
-        '''
-        # normal=normalization.Normalization(inputs=self.placeholders['features'],out_size=self.para.features,is_training=self.para.is_training)
-        # normal.normal()
 
         # create model
 
@@ -223,6 +216,11 @@ class Model(object):
                     max_rmse=rmse_error
                     self.saver.save(self.sess,save_path=self.para.save_path+'model.ckpt')
 
+                    if os.path.exists('model1'):shutil.rmtree('model1')
+                    builder = tf.saved_model.builder.SavedModelBuilder('model1')
+                    builder.add_meta_graph_and_variables(self.sess, ["mytag"])
+                    builder.save()
+
     def evaluate(self):
         '''
         :param para:
@@ -268,9 +266,6 @@ class Model(object):
         else:
             label_list = np.array([row for row in label_list])
             predict_list = np.array([row for row in predict_list])
-
-        np.savetxt('results/results_label.txt',label_list,'%.3f')
-        np.savetxt('results/results_predict.txt', predict_list, '%.3f')
 
         label_list=np.reshape(label_list,[-1])
         predict_list=np.reshape(predict_list,[-1])
