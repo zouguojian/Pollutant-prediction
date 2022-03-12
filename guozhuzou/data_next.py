@@ -36,27 +36,26 @@ class DataIterator():
         self.window_step=window_step           # windows step
 
         # 读取电厂的数据和某个站点的污染物浓度
-        self.data_s=self.get_source_data('/Users/guojianzou/pollutant-prediction/data/new_data/train_s.csv').values
-        self.data_p=self.get_source_data('/Users/guojianzou/pollutant-prediction/data/new_data/train_p.csv').values
+        self.train_x_y=self.get_source_data('/Users/guojianzou/Documents/program/shanghai_weather/train_weather_day.csv').values[:,2:]
+        self.test_x_y=self.get_source_data('/Users/guojianzou/Documents/program/shanghai_weather/test_weather_day.csv').values[:,2:]
+
+        print(self.train_x_y.shape)
+        print(self.test_x_y.shape)
 
         # print('the resource dada shape are : ',self.data_s.shape, self.data_p.shape)
 
         # 寻找数据集中的最大值和最小值
-        self.max_s,self.min_s=self.get_max_min(self.data_s[:,2:])
-        self.max_p, self.min_p = self.get_max_min(self.data_p[:,3:])
+        self.max_train,self.min_train=self.get_max_min(self.train_x_y)
+        self.max_test, self.min_test = self.get_max_min(self.test_x_y)
+        self.max,self.min=[max(self.max_train[i],self.max_test[i]) for i in range(len(self.max_train))],[min(self.min_train[i],self.min_test[i]) for i in range(len(self.min_train))]
+
+        print('the max feature list is :', self.max)
+        print('the min feature list is :', self.min)
 
         self.normalize=normalize
         if self.normalize:
-            self.normalization(self.data_s, self.min_s, self.max_s, 2) # normalization
-            self.normalization(self.data_p, self.min_p, self.max_p, 3) # normalization
-
-        # 数据集分割出来的部分，作为训练集
-        self.train_s = self.data_s[0: int(self.data_s.shape[0]//self.site_num * self.data_divide) * self.site_num]
-        self.train_p = self.data_p[0: int(self.data_p.shape[0] * self.data_divide)]
-
-        # 数据集分割出来的部分，作为测试集
-        self.test_s = self.data_s[int(self.data_s.shape[0] // self.site_num * self.data_divide) * self.site_num:]
-        self.test_p = self.data_p[int(self.data_p.shape[0] * self.data_divide):]
+            self.normalization(self.train_x_y, self.min, self.max) # normalization
+            self.normalization(self.test_x_y, self.min, self.max) # normalization
 
     def get_source_data(self,file_path):
         '''
@@ -82,13 +81,11 @@ class DataIterator():
         for i in range(data.shape[1]):
             min_list.append(min(data[:,i]))
             max_list.append(max(data[:,i]))
-        print('the max feature list is :', max_list)
-        print('the min feature list is :', min_list)
         return max_list, min_list
 
-    def normalization(self,data, min, max, index_start):
-        for i in range(data.shape[1]-index_start):
-            data[:,i+index_start]=(data[:,i+index_start] - np.array(min[i])) / (np.array(max[i]) - np.array(min[i]+self.min_value))
+    def normalization(self,data, min, max):
+        for i in range(data.shape[1]):
+            data[:,i]=(data[:,i] - np.array(min[i])) / (np.array(max[i]) - np.array(min[i]+self.min_value))
 
     def generator(self):
         '''
@@ -98,31 +95,22 @@ class DataIterator():
         '''
 
         if self.is_training:
-            data_s=self.train_s
-            data_p=self.train_p
+            data_s=self.train_x_y
         else:
-            data_s=self.test_s
-            data_p = self.test_p
+            data_s=self.test_x_y
 
-        low1, low2=0,0
-        high1,high2=data_s.shape[0],data_p.shape[0]
+        low, high =0, data_s.shape[0]
 
-        while (low2+self.time_size+self.prediction_size) <= high2:
-            label=data_p[low2 + self.time_size : low2 + self.time_size + self.prediction_size, 3 + self.pollutant_id]
+        while (low+self.time_size+self.prediction_size) <= high:
+            label=data_s[low + self.time_size : low + self.time_size + self.prediction_size, 1]
             # label=np.concatenate([label[i : (i + 1), :] for i in range(self.prediction_size)], axis=1)
 
-            yield (data_s[low1:low1+self.time_size * self.site_num,2:],
-                   data_p[low2:low2+self.time_size,3:],
-                   data_p[low2:low2 + self.time_size + self.prediction_size,0],
-                   data_p[low2:low2 + self.time_size + self.prediction_size, 1],
-                   data_p[low2:low2 + self.time_size + self.prediction_size, 2],
+            yield (data_s[low:low+self.time_size],
                    label)
             if self.is_training:
-                low1 += self.window_step * self.site_num
-                low2 += self.window_step
+                low += self.window_step
             else:
-                low1 += self.prediction_size * self.site_num
-                low2 += self.prediction_size
+                low += self.prediction_size
 
     def next_batch(self, batch_size=32, epochs=1, is_training=True):
         '''
@@ -133,10 +121,10 @@ class DataIterator():
         '''
         self.is_training=is_training
 
-        dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32,tf.float32,tf.float32,tf.float32,tf.float32,tf.float32))
+        dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.float32))
 
         if self.is_training:
-            dataset=dataset.shuffle(buffer_size=int(self.train_p.shape[0]-self.time_size-self.prediction_size)//self.window_step)
+            dataset=dataset.shuffle(buffer_size=int(self.train_x_y.shape[0]-self.time_size-self.prediction_size)//self.window_step)
             dataset=dataset.repeat(count=epochs)
         dataset=dataset.batch(batch_size=batch_size)
         iterator=dataset.make_one_shot_iterator()

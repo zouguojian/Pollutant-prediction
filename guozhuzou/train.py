@@ -6,14 +6,13 @@ from __future__ import division
 from __future__ import print_function
 from guozhuzou.hyparameter import parameter
 from guozhuzou.cnn import CnnClass
+from guozhuzou.utils import construct_feed_dict
 
-import pandas as pd
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
-import model.normalization as normalization
 
-import spatial_temporal_model.process as data_load
+import guozhuzou.data_next as data_load
 import os
 import argparse
 
@@ -29,7 +28,7 @@ class Model(object):
         # define placeholders
         self.placeholders = {
             # None : batch _size * time _size
-            'features': tf.placeholder(tf.float32, shape=[None, self.para.input_length, self.para.site_num, self.para.features1],name='input'),
+            'features': tf.placeholder(tf.float32, shape=[None, self.para.input_length, self.para.features],name='input'),
             'labels': tf.placeholder(tf.float32, shape=[None, self.para.output_length]),
             'dropout': tf.placeholder_with_default(0., shape=()),
             'is_training': tf.placeholder(tf.bool, shape=(),name='input_is_training'),
@@ -61,18 +60,11 @@ class Model(object):
         c_encoder = CnnClass(hp=self.para, placeholders=self.placeholders)
 
         # [batch, time ,hidden size]
-        (h_states1, c_states1) = l.encoding(self.placeholders['features1'], emb[:,:self.para.input_length,:])
-        print('h_states1 shape is : ', h_states1.shape)
-
+        self.pres = c_encoder.cnn(self.placeholders['features'])
         print('pres shape is : ', self.pres.shape)
 
         self.cross_entropy = tf.reduce_mean(
             tf.sqrt(tf.reduce_mean(tf.square(self.pres + 1e-10 - self.placeholders['labels']), axis=0)))
-
-        print(self.cross_entropy)
-        print('cross shape is : ',self.cross_entropy.shape)
-
-        tf.summary.scalar('cross_entropy',self.cross_entropy)
         # backprocess and update the parameters
         self.train_op = tf.train.AdamOptimizer(self.para.learning_rate).minimize(self.cross_entropy)
 
@@ -154,8 +146,6 @@ class Model(object):
 
         max_mae = 100
         self.sess.run(tf.global_variables_initializer())
-        merged = tf.summary.merge_all()
-        writer = tf.summary.FileWriter(logs_path,graph=tf.get_default_graph())
 
         self.iterate = data_load.DataIterator(site_id=self.para.target_site_id,
                                               site_num=self.para.site_num,
@@ -169,18 +159,17 @@ class Model(object):
 
         next_elements=self.iterate.next_batch(batch_size=self.para.batch_size, epochs=self.para.epochs,is_training=True)
 
-        for i in range(int((self.iterate.train_p.shape[0] - (self.para.input_length + self.para.output_length))//self.para.step)
+        for i in range(int((self.iterate.train_x_y.shape[0] - (self.para.input_length + self.para.output_length))//self.para.step)
                     // self.para.batch_size * self.para.epochs):
 
-            x1, x2, m, d, h, label =self.sess.run(next_elements)
-            features1 = np.reshape(np.array(x1), [-1, self.para.input_length, self.para.site_num, self.para.features1])
-            features2 = np.reshape(np.array(x2), [-1, self.para.input_length, self.para.features2])
-            feed_dict = construct_feed_dict(features1, features2, m, d, h, label, self.placeholders)
+            x, label =self.sess.run(next_elements)
+            features = np.reshape(np.array(x), [-1, self.para.input_length, self.para.features])
+            feed_dict = construct_feed_dict(features, label, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.para.dropout})
             feed_dict.update({self.placeholders['is_training']: self.para.is_training})
 
-            summary, loss, _ = self.sess.run((merged,self.cross_entropy,self.train_op), feed_dict=feed_dict)
-            print("after %d steps,the training average loss value is : %.6f" % (i, loss))
+            loss, _ = self.sess.run((self.cross_entropy,self.train_op), feed_dict=feed_dict)
+            # print("after %d steps,the training average loss value is : %.6f" % (i, loss))
             # writer.add_summary(summary, loss)
 
             # validate processing
@@ -217,15 +206,14 @@ class Model(object):
                                                     normalize=self.para.normalize)
 
         next_ = self.iterate_test.next_batch(batch_size=self.para.batch_size, epochs=1,is_training=False)
-        max,min=self.iterate_test.max_p[self.pollutant_id[self.para.pollutant_id]],self.iterate_test.min_p[self.pollutant_id[self.para.pollutant_id]]
+        max,min=self.iterate_test.max[1],self.iterate_test.min[1]
 
-        for i in range(int((self.iterate_test.test_p.shape[0] -(self.para.input_length+ self.para.output_length))//self.para.output_length)
+        for i in range(int((self.iterate_test.test_x_y.shape[0] -(self.para.input_length+ self.para.output_length))//self.para.output_length)
                        // self.para.batch_size):
-            x1, x2, m, d, h, label =self.sess.run(next_)
-            features1 = np.reshape(np.array(x1), [-1, self.para.input_length, self.para.site_num, self.para.features1])
-            features2 = np.reshape(np.array(x2), [-1, self.para.input_length, self.para.features2])
+            x, label =self.sess.run(next_)
+            features = np.reshape(np.array(x), [-1, self.para.input_length, self.para.features])
 
-            feed_dict = construct_feed_dict(features1, features2,  m, d, h, label, self.placeholders)
+            feed_dict = construct_feed_dict(features, label, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             feed_dict.update({self.placeholders['is_training']: self.para.is_training})
 
@@ -243,14 +231,8 @@ class Model(object):
             label_list = np.array([row for row in label_list])
             predict_list = np.array([row for row in predict_list])
 
-        # np.savetxt('results/results_label.txt',label_list,'%.3f')
-        # np.savetxt('results/results_predict.txt', predict_list, '%.3f')
-
         label_list=np.reshape(label_list,[-1])
         predict_list=np.reshape(predict_list,[-1])
-
-        print(label_list)
-        print(predict_list)
 
         average_error, rmse_error, cor, R2= self.accuracy(label_list, predict_list)  #产生预测指标
         # self.describe(label_list, predict_list, self.para.output_length)   #预测值可视化
