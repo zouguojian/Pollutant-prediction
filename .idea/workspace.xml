@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3ef2644-d696-4093-ae0a-4abad8778fd6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/guozhuzou/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/guozhuzou/cnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/guozhuzou/cnn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/guozhuzou/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/guozhuzou/data_next.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/guozhuzou/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/guozhuzou/hyparameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/guozhuzou/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/guozhuzou/train.py" afterDir="false" />
-    </list>
+    <list default="true" id="b3ef2644-d696-4093-ae0a-4abad8778fd6" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +12,7 @@
     <session id="-1151327133">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="12" />
+          <entry key="project.closed" value="13" />
           <entry key="project.open.time.1" value="7" />
           <entry key="project.open.time.4" value="5" />
           <entry key="project.open.time.5" value="1" />
@@ -190,8 +183,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-28" />
-    <option name="y" value="43" />
+    <option name="x" value="215" />
+    <option name="y" value="46" />
     <option name="width" value="1440" />
     <option name="height" value="796" />
   </component>
@@ -388,14 +381,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-28" y="43" width="1440" height="796" extended-state="0" />
+    <frame x="215" y="46" width="1440" height="796" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17406625" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.73295456" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.73295456" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914772" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
