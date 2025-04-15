@@ -1,0 +1,94 @@
+model constructed begin....
+model constructed end....
+loading data....
+trainX: (17346, 12, 12, 2)		 trainY: (17346, 6, 12)
+valX:   (8748, 12, 12, 2)		valY:   (8748, 6, 12)
+testX:   (8748, 12, 12, 2)		testY:   (8748, 6, 12)
+mean:   79.8397		std:   80.9501
+data loaded!
+loading end....
+train begin....
+in the training step, epoch 1, lr 0.001000, loss 30.2420, time 109.1 sec
+in the 2th epoch, the validate average loss value is : 22.349
+in the 2th epoch, the test average loss value is : 22.442
+in the training step, epoch 2, lr 0.001000, loss 25.3172, time 96.8 sec
+in the training step, epoch 3, lr 0.001000, loss 24.4044, time 96.2 sec
+in the 4th epoch, the validate average loss value is : 20.272
+in the 4th epoch, the test average loss value is : 20.350
+in the training step, epoch 4, lr 0.001000, loss 24.0693, time 97.8 sec
+in the training step, epoch 5, lr 0.001000, loss 23.6776, time 97.9 sec
+in the training step, epoch 6, lr 0.001000, loss 23.7728, time 96.2 sec
+in the training step, epoch 7, lr 0.001000, loss 23.9403, time 103.3 sec
+in the training step, epoch 8, lr 0.001000, loss 23.3401, time 121.5 sec
+in the training step, epoch 9, lr 0.001000, loss 23.0531, time 122.9 sec
+in the training step, epoch 10, lr 0.001000, loss 22.8375, time 120.3 sec
+in the 11th epoch, the validate average loss value is : 19.518
+in the 11th epoch, the test average loss value is : 19.837
+in the training step, epoch 11, lr 0.000900, loss 23.1901, time 121.4 sec
+in the training step, epoch 12, lr 0.000900, loss 22.7623, time 118.6 sec
+in the training step, epoch 13, lr 0.000900, loss 22.6835, time 123.3 sec
+in the 14th epoch, the validate average loss value is : 19.088
+in the 14th epoch, the test average loss value is : 19.804
+in the training step, epoch 14, lr 0.000900, loss 22.7687, time 121.6 sec
+in the training step, epoch 15, lr 0.000900, loss 22.6833, time 127.6 sec
+in the 16th epoch, the validate average loss value is : 18.928
+in the 16th epoch, the test average loss value is : 19.644
+in the training step, epoch 16, lr 0.000900, loss 22.7549, time 123.6 sec
+in the training step, epoch 17, lr 0.000900, loss 22.5377, time 117.7 sec
+in the training step, epoch 18, lr 0.000900, loss 22.4803, time 121.3 sec
+in the 19th epoch, the validate average loss value is : 18.685
+in the 19th epoch, the test average loss value is : 19.554
+in the training step, epoch 19, lr 0.000900, loss 22.5725, time 125.8 sec
+in the training step, epoch 20, lr 0.000900, loss 22.3752, time 126.4 sec
+in the training step, epoch 21, lr 0.000810, loss 22.3041, time 116.6 sec
+in the training step, epoch 22, lr 0.000810, loss 22.1493, time 119.4 sec
+in the 23th epoch, the validate average loss value is : 18.535
+in the 23th epoch, the test average loss value is : 19.611
+in the training step, epoch 23, lr 0.000810, loss 22.1568, time 123.9 sec
+in the training step, epoch 24, lr 0.000810, loss 22.1685, time 126.7 sec
+in the 25th epoch, the validate average loss value is : 18.232
+in the 25th epoch, the test average loss value is : 19.502
+in the training step, epoch 25, lr 0.000810, loss 21.6048, time 123.3 sec
+in the 26th epoch, the validate average loss value is : 18.179
+in the 26th epoch, the test average loss value is : 19.710
+in the training step, epoch 26, lr 0.000810, loss 21.6857, time 122.9 sec
+in the training step, epoch 27, lr 0.000810, loss 21.6507, time 120.8 sec
+in the training step, epoch 28, lr 0.000810, loss 21.6165, time 124.4 sec
+in the 29th epoch, the validate average loss value is : 18.131
+in the 29th epoch, the test average loss value is : 19.819
+in the training step, epoch 29, lr 0.000810, loss 21.5717, time 121.7 sec
+in the training step, epoch 30, lr 0.000810, loss 21.8868, time 116.6 sec
+in the training step, epoch 31, lr 0.000729, loss 21.5624, time 121.0 sec
+in the 32th epoch, the validate average loss value is : 17.809
+in the 32th epoch, the test average loss value is : 19.544
+in the training step, epoch 32, lr 0.000729, loss 21.6405, time 117.3 sec
+in the training step, epoch 33, lr 0.000729, loss 21.4340, time 124.9 sec
+in the training step, epoch 34, lr 0.000729, loss 20.8462, time 125.6 sec
+in the 35th epoch, the validate average loss value is : 17.803
+in the 35th epoch, the test average loss value is : 19.754
+in the training step, epoch 35, lr 0.000729, loss 21.0386, time 118.9 sec
+in the training step, epoch 36, lr 0.000729, loss 21.1077, time 123.1 sec
+in the training step, epoch 37, lr 0.000729, loss 21.0069, time 125.0 sec
+in the training step, epoch 38, lr 0.000729, loss 21.0907, time 121.5 sec
+in the training step, epoch 39, lr 0.000729, loss 20.9008, time 125.7 sec
+in the training step, epoch 40, lr 0.000729, loss 21.0321, time 122.8 sec
+in the 41th epoch, the validate average loss value is : 17.547
+in the 41th epoch, the test average loss value is : 19.826
+in the training step, epoch 41, lr 0.000656, loss 20.6825, time 123.3 sec
+in the training step, epoch 42, lr 0.000656, loss 21.0812, time 128.0 sec
+in the training step, epoch 43, lr 0.000656, loss 21.0826, time 121.9 sec
+in the 44th epoch, the validate average loss value is : 17.467
+in the 44th epoch, the test average loss value is : 20.009
+in the training step, epoch 44, lr 0.000656, loss 20.7415, time 122.9 sec
+in the training step, epoch 45, lr 0.000656, loss 20.6209, time 117.3 sec
+in the training step, epoch 46, lr 0.000656, loss 20.6600, time 124.8 sec
+in the training step, epoch 47, lr 0.000656, loss 20.5347, time 121.8 sec
+in the 48th epoch, the validate average loss value is : 17.385
+in the 48th epoch, the test average loss value is : 20.149
+in the training step, epoch 48, lr 0.000656, loss 20.6724, time 123.4 sec
+in the training step, epoch 49, lr 0.000656, loss 20.3467, time 121.4 sec
+in the 50th epoch, the validate average loss value is : 17.385
+in the 50th epoch, the test average loss value is : 19.865
+in the training step, epoch 50, lr 0.000656, loss 20.4437, time 122.6 sec
+train end....
+in the test phase,  mae: 19.8646, rmse: 36.5496, mape: 0.943336
